@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html><html>
 <head>
     <meta charset="UTF-8">
 	<title>canvas</title>
@@ -14,7 +13,8 @@
 	/*for ( var i = 0; i < 10; i++) {
 	ctx.fillRect(i * 10, i * 5, 10, 5);
 	}*/
-	/*ctx.fillStyle = "PeachPuff";
+	function drawPeople () {
+	ctx.fillStyle = "PeachPuff";
 	ctx.fillRect (40, 10, 50, 40);
 	ctx.fillRect (60, 50, 10, 20);
 	ctx.fillRect (0, 60, 20, 10);
@@ -34,8 +34,84 @@
 	ctx.fillRect (55, 30, 5, 5);
 	ctx.fillRect (70, 30, 5, 5);
 	ctx.fillRect (60, 35, 10, 5);
-	//ctx.fillStyle = "Lime";
-	//ctx.fillRect (0, 0, 100, 100);*/
+	}
+	function drawColorSquare (color) {
+	ctx.fillStyle = color;
+	ctx.fillRect (0, 0, 100, 100);
+	}
+	function colorStrokerect (color) {
+	ctx.lineWidth = 4;
+	ctx.strokeStyle = color; 
+	ctx.strokeRect (5, 5, 1335, 625);
+	}
+	function drawKrestik (color) {
+	ctx.strokeStyle = color;
+	ctx.lineWidth = 4;
+	ctx.beginPath();
+	ctx.moveTo(10, 10);
+	ctx.lineTo(60, 60);
+	ctx.moveTo(10, 60);
+	ctx.lineTo(60, 10);
+	ctx.stroke();
+	}
+	function drawHouse () {
+	ctx.fillStyle = "Chocolate";
+	ctx.beginPath ();
+	ctx.moveTo(100, 100);
+	ctx.lineTo(100, 60);
+	ctx.lineTo(130, 30);
+	ctx.lineTo(160, 60);
+	ctx.lineTo(160, 100);
+	ctx.lineTo(100, 100);
+	ctx.fill();	
+	}
+	function circle  (width, color, x, y, radius) {
+	ctx.lineWidth = width;
+	ctx.strokeStyle = color;
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.stroke();
+	}
+	function fillCircle(color, x, y, radius) {
+	ctx.lineWidth = 1;
+	ctx.fillStyle = color;
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.fill();
+	}
+	function animation () {
+	var size = 0;
+	var position = 0;
+	setInterval(function () {
+		ctx.clearRect(0, 0, 200, 200);
+		ctx.fillRect(position, position, size, size);
+		if(position === 200 && size === 200) {
+			position = 0;
+			size = 0
+		}
+	}, 30)
+	} 
+	function update (coordinate) {
+		var  offset = Math.random() * 4 - 2;
+		coordinate += offset;
+		if (coordinate > 200) {
+			coordinate = 200;
+		} 
+		if (coordinate < 0) {
+			coordinate = 0;
+		}
+		return coordinate;
+	}
+	function Bee () {
+	var x = 100;
+	var y = 100;
+	setInterval (function () {
+		ctx.clearRect(0, 0, 200, 200);
+		fillCircle("Gold", x, y, 10);
+		x = update(x);
+		y = update(y);
+		ctx.strokeRect(0, 0, 200, 200);
+	}, 30);}
 	</script>
 	</body> 
 </html>
