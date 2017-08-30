@@ -7,12 +7,15 @@
 
 <body>
 	<canvas id="canvas" width="200" height="200"></canvas>
+	<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+	<h1></h1>
 	<script>
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
-	/*for ( var i = 0; i < 10; i++) {
+	function fillRect (times) {
+	for ( var i = 0; i < times; i++) {
 	ctx.fillRect(i * 10, i * 5, 10, 5);
-	}*/
+	} }
 	function drawPeople () {
 	ctx.fillStyle = "PeachPuff";
 	ctx.fillRect (40, 10, 50, 40);
@@ -112,6 +115,53 @@
 		y = update(y);
 		ctx.strokeRect(0, 0, 200, 200);
 	}, 30);}
+	var Ball = function (ju, io) {
+		this.x = 100;
+		this.y = 100;
+		this.xSpeed = ju;
+		this.ySpeed = io;
+		}
+	Ball.prototype.draw = function () {
+		fillCircle ("", this.x, this.y, 3)
+	}
+	Ball.prototype.move = function () {
+		this.x += this.xSpeed;
+		this.y += this.ySpeed
+	}
+	Ball.prototype.checkCollision = function() {
+		if(this.x < 0 || this.x > 200) {
+			this.xSpeed = -this.xSpeed;
+		}
+		if(this.y < 0 || this.y > 200) {
+			this.ySpeed = -this.ySpeed;
+		}
+	}
+	function moveBall () {
+	var  ball = new Ball(-5, 6);
+	setInterval (function () {
+		ctx.clearRect (0, 0, 200, 200);
+		ball.draw();
+		ball.move();
+		ball.checkCollision();
+		ctx.strokeRect(0, 0, 200, 200);
+	}, 1);
+	}
+	function key () {
+	$("body").keydown(function (event) {
+		$("h1").text(event.keyCode);
+	});
+	}
+	var keyNames = {
+		32: "space",
+		37: "left",
+		38: "up",
+		39: "right",
+		40: "down"
+	};
+	$("body").keydown(function(event){
+		$("h1").text(keyNames[event.keyCode]);
+	});
+
 	</script>
 	</body> 
 </html>
